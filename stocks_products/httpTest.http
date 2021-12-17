@@ -1,0 +1,61 @@
+@baseUrl = 'http://localhost:8000/api/v1/'
+
+
+GET {{baseUrl}}
+Content-Type: application/json
+
+###
+
+GET http://localhost:8000/api/v1/products
+Accept: application/json
+
+###
+
+GET http://localhost:8000/api/v1/stocks
+Accept: application/json
+
+###
+
+POST http://localhost:8000/api/v1/products/
+Accept: application/json
+
+{
+"title": "123",
+"description": "Откручивать гайки"
+}
+
+###
+
+POST http://localhost:8000/api/v1/stocks/
+Accept: application/json
+
+{
+  "address": "мой twst2",
+  "positions": [
+    {
+      "product": 3,
+      "quantity": 40,
+      "price": 24.00
+    }
+  ]
+}
+
+###
+
+PATCH http://localhost:8000/api/v1/stocks/1/
+Accept: application/json
+
+{
+"address": "мой address123" ,
+"positions": [{
+    "product": 4,
+    "quantity": "100",
+    "price": "150"
+    }]
+}
+
+
+
+
+
+
