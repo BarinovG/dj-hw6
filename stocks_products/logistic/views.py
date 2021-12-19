@@ -1,37 +1,23 @@
 from rest_framework.viewsets import ModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
-from rest_framework.generics import ListAPIView
-
+from rest_framework.pagination import PageNumberPagination
 from .models import Product, Stock
 from .serializers import ProductSerializer, StockSerializer
 
-#
-# class ProductsList(ListAPIView):
-#     model = Product
-#     serializer_class = ProductSerializer
-#     filter_backends = [SearchFilter]
-#     search_fields = ["title", "description"]
-#
-#     def get_queryset(self):
-#         stock = self.request.stock
-#         return stock.stocks_set.all()
 
 
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-
-
-
+    pagination_class = PageNumberPagination
+    filter_backends = [SearchFilter]
+    search_fields = ["title", "description"]
 
 class StockViewSet(ModelViewSet):
+    queryset = Stock.objects.all()
     serializer_class = StockSerializer
-    filter_backends = [SearchFilter]
-    search_fields = ["id", "products", "address"]
+    pagination_class = PageNumberPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["id", "products"]
 
-    def get_queryset(self):
-        queryset = Stock.objects.all()
-        username = self.request.query_params.get('username')
-        if username is not None:
-            queryset = queryset.filter(purchaser__username=username)
-        return queryset

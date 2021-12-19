@@ -7,12 +7,13 @@ GET http://localhost:8000/api/v1/products/
 Content-Type: application/json
 
 ###
-GET http://localhost:8000/api/v1/products/
+
+GET http://localhost:8000/api/v1/products/?search=еный
 Accept: application/json
 
 ###
 
-GET http://localhost:8000/api/v1/stocks/?address=Блюхер
+GET http://localhost:8000/api/v1/stocks/?products=8
 Accept: application/json
 
 ###
@@ -39,7 +40,7 @@ Accept: application/json
   "address": "мой twst2",
   "positions": [
     {
-      "product": 3,
+      "product": 9,
       "quantity": 40,
       "price": 24.00
     }
